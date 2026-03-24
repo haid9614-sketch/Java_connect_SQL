@@ -1,14 +1,17 @@
+import java.rmi.StubNotFoundException;
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Đang kiểm tra kết nối từ class Main...");
-
-        // Gọi hàm ketNoi() từ class SQL_connect
-        Connection myConn = SQL_connect.ketNoi();
-
-        // Nếu myConn khác null nghĩa là kết nối thành công
-        if (myConn != null) {
-            System.out.println("Main đã nhận được kết nối! Sẵn sàng làm việc với DB.");
+        StudenDao studao = new StudenDao();
+        System.out.println("DANH SACH SINH VIEN GIOI LA: ");
+        ArrayList<Student> result = studao.getStudentGioi();
+        for(Student x : result) {
+            System.out.println("name: " + x.getName() + " | gpa: " + x.getGpa());
         }
     }
 }
